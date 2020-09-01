@@ -41,14 +41,28 @@
 -- WHERE Artist.ArtistName = 'Nirvana'
 
 -- 11. Write a SELECT statement to display how many songs exist for each album. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
+-- SELECT COUNT(SongLength), Album.Title
+-- FROM Song LEFT JOIN Album ON Song.AlbumId = Album.Id GROUP BY Album.Title
 
 -- 12. Write a SELECT statement to display how many songs exist for each artist. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
+-- SELECT COUNT(SongLength), ArtistName
+-- FROM Song LEFT JOIN Artist ON Song.ArtistId = Artist.Id GROUP BY ArtistName
 
 -- 13. Write a SELECT statement to display how many songs exist for each genre. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
+-- SELECT COUNT(SongLength), Label
+-- FROM Song LEFT JOIN Genre ON Song.GenreId = Genre.Id GROUP BY Label
 
 -- 14. Write a SELECT query that lists the Artists that have put out records on more than one record label. Hint: When using GROUP BY instead of using a WHERE clause, use the HAVING keyword
+SELECT Artist.ArtistName
+FROM Album LEFT JOIN Artist ON Album.ArtistId = Artist.Id GROUP BY Artist.ArtistName HAVING COUNT(Label) > 1
 
--- 15. 
+-- 15. Using MAX() function, write a select statement to find the album with the longest duration. The result should display the album title and the duration.
+-- SELECT Album.Title, MAX(AlbumLength)
+-- FROM Album GROUP BY Album.Title IN (1)
+
+---- 16. Using MAX() function, write a select statement to find the song with the longest duration. The result should display the song title and the duration.
+
+-- 17. Modify the previous query to also display the title of the album.
 
 
 
