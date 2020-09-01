@@ -41,8 +41,6 @@
 -- WHERE Artist.ArtistName = 'Nirvana'
 
 -- 11. Write a SELECT statement to display how many songs exist for each album. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
-SELECT Count(Song.Id), Album.Title, AlbumLength
-FROM Song LEFT JOIN Album ON Song.AlbumId = Album.Id GROUP By AlbumLength
 
 -- 12. Write a SELECT statement to display how many songs exist for each artist. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
 
