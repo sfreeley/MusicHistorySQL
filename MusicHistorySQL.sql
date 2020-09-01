@@ -63,13 +63,14 @@ FROM Album LEFT JOIN Artist ON Album.ArtistId = Artist.Id GROUP BY Artist.Artist
 -- FROM Album  
 -- WHERE AlbumLength = (SELECT MAX(AlbumLength) FROM Album)
 
-
 -- 16. Using MAX() function, write a select statement to find the song with the longest duration. The result should display the song title and the duration.
+
 -- SELECT Title, SongLength
 -- FROM Song
 -- WHERE SongLength = (SELECT MAX(SongLength) FROM Song)
 
 -- 17. Modify the previous query to also display the title of the album.
+
 -- SELECT Song.Title, SongLength, Album.Title
 -- FROM Song LEFT JOIN Album ON Song.AlbumId = Album.Id 
 -- WHERE SongLength =  (SELECT MAX(SongLength) FROM Song)
