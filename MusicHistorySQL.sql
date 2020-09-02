@@ -31,10 +31,14 @@ INSERT INTO Album VALUES ('Nevermind', '1991', 999, 'DGC Records', 28, 2)
 INSERT INTO Song VALUES ('Smells Like Teen Spirit', 999, 'September 10, 1999', 2, 28, 23)
 
 -- 10. Write a SELECT query that provides the song titles, album title, and artist name for all of the data you just entered in. Use the LEFT JOIN keyword sequence to connect the tables, and the WHERE keyword to filter the results to the album and artist you added.
+-- alias it!
+--always join FK to PK
+--can do al.* to get everything from album al table
+--every time doing LEFT JOIN, we are joining one grid of data to another grid of data 
 
 -- query for album title, song title, and artist name from song table (that contains foreign key /AlbumId) 
 -- LEFT JOIN (ie if Song table is empty, it will still include it even if Album table does not have a matching album to that song)
--- LEFT JOIN Album (which has the ArtistId FK) with Artist table ( which has ArtistName, which is a column/property we are looking for)
+-- LEFT JOIN Album (which has the ArtistId FK) with Artist table ( which has ArtistName, which is a column/property we are looking for) --> this second join is joining artist table to both song and album table
 
 SELECT Album.Title, Song.Title, Artist.ArtistName
 FROM Song LEFT JOIN Album ON Song.AlbumId = Album.Id
@@ -60,9 +64,17 @@ FROM Album LEFT JOIN Artist ON Album.ArtistId = Artist.Id GROUP BY Artist.Artist
 -- 15. Using MAX() function, write a select statement to find the album with the longest duration. The result should display the album title and the duration.
 -- query for the song title, and album length from table Album WHERE ('filter') the longest album duration is queried for 
 
+-- condition WHERE using a sub-select (doing another query that gets the MAX(albumLength))
+
+--if tie, this way may be issue
 SELECT Title, AlbumLength
 FROM Album  
 WHERE AlbumLength = (SELECT MAX(AlbumLength) FROM Album)
+
+--another way ( ORDER BY has run time issues if data set is large)
+SELECT TOP 1 Title, AlbumLength
+FROM Album
+ORDER BY AlbumLength DESC
 
 -- 16. Using MAX() function, write a select statement to find the song with the longest duration. The result should display the song title and the duration.
 
