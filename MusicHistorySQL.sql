@@ -18,8 +18,10 @@ FROM Artist LEFT JOIN Album ON Artist.Id = Album.ArtistId
 LEFT JOIN Genre ON Genre.Id = Album.GenreId WHERE Genre.Label = 'Jazz' OR Genre.Label = 'Rock'
 
 -- 6. Write a SELECT statement that lists the Albums with no songs ??
-SELECT Title
-FROM Album WHERE AlbumLength IS NULL
+SELECT DISTINCT al.*
+FROM Album al
+LEFT JOIN Song s on al.id = s.AlbumId
+WHERE s.id IS NULL
 
 -- 7. Using the INSERT statement, add one of your favorite artists to the Artist table. 
 INSERT INTO Artist (ArtistName, YearEstablished) VALUES ('Nirvana', 1987)
@@ -58,8 +60,14 @@ SELECT COUNT(SongLength), Label
 FROM Song LEFT JOIN Genre ON Song.GenreId = Genre.Id GROUP BY Label
 
 -- 14. Write a SELECT query that lists the Artists that have put out records on more than one record label. Hint: When using GROUP BY instead of using a WHERE clause, use the HAVING keyword
+-- want every artist to have an album and don't want any artists with zero albums use regular JOIN
+--aggregate function -COUNT, MAX, MIN 
+-- can group by more than one column ( ie can group by artist.artistname and albumlabel --> if group by label as well will see artist name twice ie Beatles because grouping by label as well )
+-- WHERE filters rows
+-- HAVING is a WHERE clause used with GROUP BY (filters the GROUP BY specification) --> ie in this case we care about which artists have more than one label 
+
 SELECT Artist.ArtistName
-FROM Album LEFT JOIN Artist ON Album.ArtistId = Artist.Id GROUP BY Artist.ArtistName HAVING COUNT(DISTINCT Album.Label) > 1
+FROM Album JOIN Artist ON Album.ArtistId = Artist.Id GROUP BY Artist.ArtistName HAVING COUNT(DISTINCT Album.Label) > 1
 
 -- 15. Using MAX() function, write a select statement to find the album with the longest duration. The result should display the album title and the duration.
 -- query for the song title, and album length from table Album WHERE ('filter') the longest album duration is queried for 
